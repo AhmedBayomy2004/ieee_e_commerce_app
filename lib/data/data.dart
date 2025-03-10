@@ -24,14 +24,19 @@ class ProductData extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          //   SizedBox(height: 1),
           CachedNetworkImage(
             imageUrl: image_url,
             errorWidget: (context, url, error) => Icon(Icons.error),
             placeholder: (context, url) => SizedBox(
-                height: 5,
-                width: 5,
-                child: CircularProgressIndicator(strokeWidth: 1)),
+              child: Center(
+                child: Transform.scale(
+                  scale: 0.5,
+                  child: CircularProgressIndicator(
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            ),
             height: 170,
             width: 170,
             fit: BoxFit.fill,
@@ -48,7 +53,7 @@ class ProductData extends StatelessWidget {
             child: Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  price,
+                  "\$$price",
                   style: TextStyle(color: Colors.green),
                 )),
           )

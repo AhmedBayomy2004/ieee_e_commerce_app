@@ -31,27 +31,44 @@ class SettingScreen extends StatelessWidget {
         Text("UserMail_234567@gmail.com",
             style: TextStyle(fontSize: 15, color: Colors.grey)),
         SizedBox(height: 60),
-        setting_row(text: "My Orders", ic: Icon(Icons.storage)),
-        setting_row(text: "Help & Support", ic: Icon(Icons.help)),
-        setting_row(text: "About Us", ic: Icon(Icons.info)),
-        //  setting_row(text: "ChangeTheme", ic: Icon(Icons.light_mode))
-        InkWell(
-            onTap: () {
-              themeProvider.updateTheme();
+        setting_row(
+            text: "My Orders",
+            ic: Icon(Icons.storage),
+            func: () => print("My Orders")),
+        setting_row(
+            text: "Help & Support",
+            ic: Icon(Icons.help),
+            func: () => print("Help & Support")),
+        setting_row(
+            text: "About Us",
+            ic: Icon(Icons.info),
+            func: () => print("About Us")),
+        setting_row(
+            text: "Change Theme",
+            ic: themeProvider.currIcon,
+            func: () => themeProvider.updateTheme()),
+        Container(
+          height: 50,
+          margin: EdgeInsets.all(10),
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
             },
-            child: Container(
-              height: 70,
-              padding: EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  themeProvider.currIcon,
-                  SizedBox(width: 20),
-                  Text("Change Theme", style: TextStyle(fontSize: 20)),
-                  Spacer(),
-                  Icon(Icons.arrow_forward_ios_rounded)
-                ],
-              ),
-            ))
+            style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(Colors.red)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.logout),
+                SizedBox(width: 10),
+                Text(
+                  "Logout",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        )
       ],
     );
   }
@@ -59,16 +76,18 @@ class SettingScreen extends StatelessWidget {
 
 class setting_row extends StatelessWidget {
   setting_row({
+    required void Function() this.func,
     required String this.text,
     required this.ic,
     super.key,
   });
   final String text;
   final Icon ic;
+  final void Function() func;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () => print(text),
+        onTap: func,
         child: Container(
           height: 70,
           padding: EdgeInsets.all(10),
