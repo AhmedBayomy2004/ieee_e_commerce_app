@@ -27,13 +27,15 @@ class ApiManager {
   Future<RegisterResponce?> register(
       String name, String email, String password) async {
     try {
-      final respoce = await dio.post("users", data: {
+      final responce = await dio.post("users", data: {
         "name": name,
         "email": email,
         "password": password,
         "avatar": "https://picsum.photos/800",
       });
-      return respoce.data;
+      Map<String, dynamic> data = responce.data;
+
+      return RegisterResponce.fromjson(data);
     } catch (e) {
       print(e.toString());
       return null;
@@ -42,11 +44,13 @@ class ApiManager {
 
   Future<RegisterResponce?> login(String email, String password) async {
     try {
-      final respoce = await dio.post("auth/login", data: {
+      final responce = await dio.post("auth/login", data: {
         "email": email,
         "password": password,
       });
-      return respoce.data;
+
+      Map<String, dynamic> data = responce.data;
+      return RegisterResponce.fromjson(data);
     } catch (e) {
       print(e.toString());
       return null;

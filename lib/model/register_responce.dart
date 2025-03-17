@@ -19,7 +19,7 @@ class RegisterResponce {
     this.updatedAt,
   });
 
-  factory RegisterResponce.responce(Map<String, dynamic> json) {
+  factory RegisterResponce.fromjson(Map<String, dynamic> json) {
     return RegisterResponce(
       id: json['id'] as int?,
       email: json['email'] as String?,
@@ -36,8 +36,7 @@ class RegisterResponce {
     );
   }
 
-  Map<String, dynamic>
-      toId996EmailNicoGmailComPassword1234NameNicosRoleCustomerAvatarHttpsPicsumPhotos800CreationAt20250317T213722000ZUpdatedAt20250317T213722000Z() {
+  Map<String, dynamic> fromjson() {
     return {
       'id': id,
       'email': email,
